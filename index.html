@@ -9,24 +9,80 @@
 
 <body>
     <div id="app">
-        {{ info }}
-      </div>
+        <template v-for="menu in menus">
+            <input
+                type="radio"
+                :id="branch"
+                :value="branch"
+                name="branch"
+                v-model="currentBranch"
+            />
+            <label :for="branch">{{ branch }}</label>
+        </template>
+        <ul>
+            <li v-for="data in menus">
+                <p>{{ records }}</p>
+                
+            </li>
+        </ul>
+    </div>
+    </div>
 
-    <script>
-     new Vue({
-  el: '#app',
-  data () {
-    return {
-      info: null
-    }
-  },
-  mounted () {
-    axios
-      .get('https://data.nantesmetropole.fr/api/records/1.0/search/?dataset=244400404_menus-cantines-scolaires-nantes&q=&facet=type_menu')
-      .then(response => (this.info = response))
-  }
-})
-    </script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+		<script src="https://unpkg.com/vue@3"></script>
+		<script>
+			const apiURL =
+				"https://data.nantesmetropole.fr/api/records/1.0/search/?dataset=244400404_menus-cantines-scolaires-nantes&q=&facet=type_menu";
+			const config = {
+			};
+
+			Vue.createApp({
+				data() {
+					return {
+						
+					};
+				},
+
+				created: function () {
+					this.fetchDataPromise();
+					// this.fetchDataAsync()
+				},
+
+				
+				methods: {
+					fetchDataPromise: function () {
+						const self = this;
+						axios
+							.get(apiURL + self.currentBranch, config)
+							.then(function (response) {
+								console.log(response.data);
+								self.menus = response.data;
+								// console.log(self.commits[0].html_url);
+							})
+							.catch(function (error) {
+								console.log(error);
+							});
+					},
+					// fetchDataAsync: async function () {
+					// 	try {
+					//   	const response = await axios.get(apiURL + this.currentBranch, config)
+					// 	  console.log(response.data)
+					// 	  this.commits = response.data
+					//         // console.log(self.commits[0].html_url);
+					//   } catch(error) {
+					//     console.log(error);
+					//   }
+					// },
+					// formattedMessage: function (message) {
+					// 	const newline = message.indexOf("\n");
+					// 	return newline > 0 ? message.slice(0, newline) : message;
+					// },
+					// formattedDate: function (date) {
+					// 	return date.replace(/T|Z/g, " ");
+					// },
+				},
+			}).mount("#app");
+		</script>
 </body>
 
 </html>
