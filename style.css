@@ -1,0 +1,38 @@
+*{
+    font-family: Helvetica}
+
+
+
+ul{
+    list-style:none;
+}
+
+#searchSection{
+display: flex;
+justify-content: center;
+
+}
+
+
+.enfantsContainer{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.enfantCard{
+    background-color: #0079a2;
+    border-radius: 5%;
+    width: 300px;
+    padding: 2%;
+    margin: 20px;
+}
+
+.enfantCard p{
+    color: white;
+}
+
+.name{
+    text-align: center;
+    font-weight: bold;
+}
