@@ -9,6 +9,7 @@
 </head>
 
 <body>
+
     <div id="app">
 		
 		<div id="searchSection">
@@ -18,10 +19,10 @@
 
 		<section class="enfantsContainer">			
 					<div v-for="enfant in enfants.records" class="enfantCard">
-						<p class="name">{{ enfant.fields.prenom }}</p>
+						<p class="name">{{ enfant.fields.enfant_prenom }}</p>
 						<div class="enfantDetails">
-							<p>Sexe : {{ enfant.fields.sexe }}</p>
-							<p>Année de naissance : {{ enfant.fields.annee_naissance }} </p>
+							<p>Sexe : {{ enfant.fields.enfant_sexe }}</p>
+							<p>Année de naissance : {{ enfant.fields.annee }} </p>
 						</div>
 					</div>
 		</section>
@@ -32,12 +33,12 @@
 	<script src="https://unpkg.com/vue@3"></script>
 		<script>
 			const apiURL =
-				"https://data.nantesmetropole.fr/api/records/1.0/search/?dataset=244400404_prenoms-enfants-nes-nantes&q=&rows=50&sort=annee_naissance&facet=prenom&facet=sexe&facet=annee_naissance";
+				"https://data.nantesmetropole.fr/api/records/1.0/search/?dataset=244400404_prenoms-enfants-nes-nantes&q=&facet=enfant_sexe&facet=enfant_prenom&facet=annee";
 			
 			Vue.createApp({
 				data() {
 					return {
-						enfants: null,
+						enfants: [],
 					};
 				},
 
